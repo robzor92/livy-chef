@@ -1,0 +1,5 @@
+dependencies: 
+  - recipe: livy::default
+    global:  
+      - hops::dn
+      - hops::nm

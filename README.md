@@ -1,2 +1,3 @@
-# livy-chef
-Chef cookbook for installing Livy Server -  a REST server for running Spark on YARN
+# Livy REST Server for Spark on YARN
+
+Livy Chef Cookbook
