@@ -69,7 +69,7 @@ template "#{node.livy.home}/bin/start-livy.sh" do
 end
 
 template "#{node.livy.home}/bin/stop-livy.sh" do
-  source "start-livy.sh.erb"
+  source "stop-livy.sh.erb"
   owner node.livy.user
   group node.livy.group
   mode 0751

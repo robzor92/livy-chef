@@ -3,12 +3,16 @@
 export SPARK_HOME=<%= node.hadoop_spark.home %>
 export HADOOP_CONF_DIR=<%= node.apache_hadoop.home %>/etc/hadoop/conf
 
-export LIVY_HOME=<%= node.livy.home %>
+PID_FILE=<%= node.livy.home %>/livy.pid
+if [ -f $PID_FILE ] ; then
+ PID=`cat $PID_FILE`
+ kill -0 $PID
+ if [ $? -eq 0 ] ; then
+     echo "A Livy server is already running. Kill it first."
+     exit 1
+ fi
+fi
 
-#nohup env \
-#  LIVY_SERVER_JAVA_OPTS="-Dlivy.server.session.factory=yarn" \
-#  CLASSPATH=$(<%= node.apache_hadoop.home %>/bin/hadoop classpath %>) \
 
 nohup $LIVY_HOME/bin/livy-server  2>&1 > <%= node.livy.home %>/livy.log &
-
-#echo $! > <%= node.livy.home %>/livy.pid
+echo $! > /tmp/livy.pid
