@@ -3,10 +3,10 @@
 export SPARK_HOME=<%= node.hadoop_spark.home %>
 export HADOOP_CONF_DIR=<%= node.apache_hadoop.home %>/etc/hadoop/conf
 
-PID_FILE=<%= node.livy.home %>/livy.pid
+PID_FILE=/tmp/livy.pid
 if [ -f $PID_FILE ] ; then
  PID=`cat $PID_FILE`
- kill -0 $PID
+ kill -0 $PID 2>&1 > /dev/null
  if [ $? -eq 0 ] ; then
      echo "A Livy server is already running. Kill it first."
      exit 1
@@ -14,5 +14,5 @@ if [ -f $PID_FILE ] ; then
 fi
 
 
-nohup $LIVY_HOME/bin/livy-server  2>&1 > <%= node.livy.home %>/livy.log &
+nohup <%= node.livy.home %>/bin/livy-server  2>&1 > <%= node.livy.home %>/livy.log &
 echo $! > /tmp/livy.pid
