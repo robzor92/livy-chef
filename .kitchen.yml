@@ -32,6 +32,7 @@ suites:
       - recipe[ndb::install]
       - recipe[hops::install]
       - recipe[hadoop_spark::install]
+      - recipe[livy::install]
       - recipe[ndb::mgmd]
       - recipe[ndb::ndbd]
       - recipe[ndb::mysqld]
@@ -43,7 +44,6 @@ suites:
       - recipe[hops::jhs]
       - recipe[hadoop_spark::yarn]
       - recipe[hadoop_spark::historyserver]
-      - recipe[livy::install]
       - recipe[livy::default]
     attributes:
          vagrant: "true"
@@ -104,7 +104,7 @@ suites:
                private_ips: ["10.0.2.15"]
             private_ips: ["10.0.2.15"]
             public_ips: ["10.0.2.15"]
-         zeppelin:
+         livy:
             default:
                private_ips: ["10.0.2.15"]
             private_ips: ["10.0.2.15"]

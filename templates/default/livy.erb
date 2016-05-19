@@ -15,14 +15,14 @@
 
 # Variables
 
-START_PROG="<%= node.hadoop_spark.home %>/sbin/start-livy.sh"  
-STOP_PROG="<%= node.hadoop_spark.home %>/sbin/stop-livy.sh"  
+START_PROG="<%= node.livy.home %>/bin/start-livy.sh"  
+STOP_PROG="<%= node.livy.home %>/bin/stop-livy.sh"  
 
 RETVAL=0
 
 ulimit -n 65000
 
-EXEC_WITH_USER="su <%= node.hadoop_spark.user %> -c"
+EXEC_WITH_USER="su <%= node.livy.user %> -c"
 
 start() {
   $EXEC_WITH_USER "$START_PROG"

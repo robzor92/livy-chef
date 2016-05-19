@@ -3,11 +3,11 @@ Description = Livy server
 After = syslog.target network.target remote-fs.target
 
 [Service]
-User = <%= node.hadoop_spark.user %>
+User = <%= node.livy.user %>
 
-PIDFile = <%= node.livy.home %>/livy.pid
-ExecStart = <%= node.livy.home %>/sbin/start-livy.sh
-ExecStop = <%= node.livy.home %>/sbin/stop-livy.sh
+PIDFile = /tmp/livy.pid
+ExecStart = <%= node.livy.home %>/bin/start-livy.sh
+ExecStop = <%= node.livy.home %>/bin/stop-livy.sh
 LimitNOFILE = 20000
 
 Type = forking

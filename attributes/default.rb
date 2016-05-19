@@ -14,3 +14,5 @@ default.livy.base_dir                =  node.livy.dir + "/livy-server-" + node.l
 default.livy.home                    =  node.livy.dir + "/livy-server" 
 default.livy.keystore                = "#{node.kagent.base_dir}/keystore.jks"
 default.livy.keystore_password       = ""
+
+default.livy.systemd                 = "true"

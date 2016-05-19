@@ -3,10 +3,10 @@ nn_endpoint = private_recipe_ip("apache_hadoop", "nn") + ":#{node.apache_hadoop.
 home = node.apache_hadoop.hdfs.user_home
 
 
-livy_dir="#{home}/#{node.hadoop_spark.user}/livy"
+livy_dir="#{home}/#{node.livy.user}/livy"
 apache_hadoop_hdfs_directory "#{livy_dir}" do
   action :create_as_superuser
-  owner node.hadoop_spark.user
+  owner node.livy.user
   group node.apache_hadoop.group
   mode "1770"
   not_if ". #{node.apache_hadoop.home}/sbin/set-env.sh && #{node.apache_hadoop.home}/bin/hdfs dfs -test -d #{livy_dir}"
@@ -16,8 +16,8 @@ tmp_dirs   = [ livy_dir, "#{livy_dir}/rsc-jars", "#{livy_dir}/rpl-jars" ]
 for d in tmp_dirs
  apache_hadoop_hdfs_directory d do
     action :create
-    owner node.hadoop_spark.user
-    group node.hadoop_spark.group
+    owner node.livy.user
+    group node.apache_hadoop.group
     mode "1777"
     not_if ". #{node.apache_hadoop.home}/sbin/set-env.sh && #{node.apache_hadoop.home}/bin/hdfs dfs -test -d #{d}"
   end
@@ -29,8 +29,8 @@ end
 
 template "#{node.livy.home}/conf/livy.conf" do
   source "livy.conf.erb"
-  owner node.hadoop_spark.user
-  group node.hadoop_spark.group
+  owner node.livy.user
+  group node.livy.group
   mode 0655
   variables({ 
         :private_ip => my_ip,
@@ -45,8 +45,8 @@ end
 
 template "#{node.livy.home}/conf/spark-blacklist.conf" do
   source "spark-blacklist.conf.erb"
-  owner node.hadoop_spark.user
-  group node.hadoop_spark.group
+  owner node.livy.user
+  group node.livy.group
   mode 0655
 end
 
@@ -56,22 +56,38 @@ end
 
 template "#{node.livy.home}/conf/livy-env.sh" do
   source "livy-env.sh.erb"
-  owner node.hadoop_spark.user
-  group node.hadoop_spark.group
+  owner node.livy.user
+  group node.livy.group
   mode 0655
 end
+
+template "#{node.livy.home}/bin/start-livy.sh" do
+  source "start-livy.sh.erb"
+  owner node.livy.user
+  group node.livy.group
+  mode 0751
+end
+
+template "#{node.livy.home}/bin/stop-livy.sh" do
+  source "start-livy.sh.erb"
+  owner node.livy.user
+  group node.livy.group
+  mode 0751
+end
+
+
 
 case node.platform
 when "ubuntu"
  if node.platform_version.to_f <= 14.04
-   node.override.hadoop_spark.systemd = "false"
+   node.override.livy.systemd = "false"
  end
 end
 
 
 service_name="livy"
 
-if node.hadoop_spark.systemd == "true"
+if node.livy.systemd == "true"
 
   service service_name do
     provider Chef::Provider::Service::Systemd
@@ -109,8 +125,8 @@ else #sysv
 
   template "/etc/init.d/#{service_name}" do
     source "#{service_name}.erb"
-    owner node.hadoop_spark.user
-    group node.hadoop_spark.group
+    owner node.livy.user
+    group node.livy.group
     mode 0754
     notifies :enable, resources(:service => service_name)
     notifies :restart, resources(:service => service_name), :immediately
