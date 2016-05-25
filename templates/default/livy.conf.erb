@@ -11,6 +11,8 @@ livy.server.host = <%= @private_ip %>
 # What port to start the server on.
 livy.server.port = <%= node.livy.port %>
 
+livy.server.session.factory = yarn
+
 # Time in milliseconds on how long Livy will wait before timing out an idle session.
 # Default is one hour.
 ## livy.server.session.timeout = 3600000
