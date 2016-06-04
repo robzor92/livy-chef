@@ -147,6 +147,6 @@ if node.kagent.enabled == "true"
 end
 
 
-service service_name do
+livy_restart "restart-livy-needed" do
   action :restart
 end
