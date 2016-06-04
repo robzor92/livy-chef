@@ -92,7 +92,7 @@ if node.livy.systemd == "true"
   service service_name do
     provider Chef::Provider::Service::Systemd
     supports :restart => true, :stop => true, :start => true, :status => true
-    action :restart
+    action :nothing
   end
 
   case node.platform_family
@@ -120,7 +120,7 @@ else #sysv
   service service_name do
     provider Chef::Provider::Service::Init::Debian
     supports :restart => true, :stop => true, :start => true, :status => true
-    action :restart
+    action :nothing
   end
 
   template "/etc/init.d/#{service_name}" do
@@ -146,3 +146,7 @@ if node.kagent.enabled == "true"
    end
 end
 
+
+service service_name do
+  action :restart
+end
