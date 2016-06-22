@@ -11,6 +11,23 @@ include_recipe "hops::wrap"
 
 my_ip = my_private_ip()
 
+
+user node.livy.user do
+  supports :manage_home => true
+  home "/home/#{node.livy.user}"
+  action :create
+  system true
+  shell "/bin/bash"
+  not_if "getent passwd #{node.livy.user}"
+end
+
+group node.livy.group do
+  action :modify
+   members ["#{node.livy.user}"]
+  append true
+end
+
+
 package_url = "#{node.livy.url}"
 base_package_filename = File.basename(package_url)
 cached_package_filename = "/tmp/#{base_package_filename}"
