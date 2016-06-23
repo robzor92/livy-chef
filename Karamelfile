@@ -1,6 +1,6 @@
 dependencies: 
   - recipe: livy::install
-    global:  
+    local:  
       - hadoop_spark::install
   - recipe: livy::default
     global:  

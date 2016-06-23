@@ -11,6 +11,9 @@ include_recipe "hops::wrap"
 
 my_ip = my_private_ip()
 
+group node.livy.group do
+  action :create
+end
 
 user node.livy.user do
   supports :manage_home => true
