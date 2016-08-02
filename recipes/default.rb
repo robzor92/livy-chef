@@ -142,7 +142,7 @@ if node.kagent.enabled == "true"
      stop_script "service #{service_name} stop"
      log_file "#{node.livy.home}/livy.log"
      pid_file "#{node.livy.home}/livy.pid"
-     web_port "#{node.livy.port}"
+     web_port node.livy.port.to_i
    end
 end
 
