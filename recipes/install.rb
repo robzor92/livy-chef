@@ -13,6 +13,7 @@ my_ip = my_private_ip()
 
 group node.livy.group do
   action :create
+  not_if "getent group #{node.livy.group}"
 end
 
 user node.livy.user do
@@ -26,7 +27,7 @@ end
 
 group node.livy.group do
   action :modify
-   members ["#{node.livy.user}"]
+  members ["#{node.livy.user}"]
   append true
 end
 
