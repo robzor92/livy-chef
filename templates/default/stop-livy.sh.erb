@@ -46,7 +46,7 @@ fi
 
 if [ $res -eq 0 ] ; then
  echo "Killed livy"
-elif [ $res -eq $NOT_FOUND ] ; then
+else
     echo "Could not find livy process to kill"
 fi
 
