@@ -135,16 +135,16 @@ else #sysv
 end
 
 
-if node.kagent.enabled == "true" 
+#if node.kagent.enabled == "true" 
    kagent_config service_name do
      service service_name
      start_script "service #{service_name} start"
      stop_script "service #{service_name} stop"
      log_file "#{node.livy.home}/livy.log"
      pid_file "#{node.livy.home}/livy.pid"
-     web_port node.livy.port.to_i
+     #web_port node.livy.port.to_i
    end
-end
+#end
 
 
 livy_restart "restart-livy-needed" do
