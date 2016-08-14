@@ -17,14 +17,10 @@
 
 START_PROG="<%= node.livy.home %>/bin/start-livy.sh"  
 STOP_PROG="<%= node.livy.home %>/bin/stop-livy.sh"  
-
-RETVAL=0
-
-ulimit -n 65000
-
 EXEC_WITH_USER="su <%= node.livy.user %> -c"
 
 start() {
+  ulimit -n 65000 2>&1 > /dev/null
   $EXEC_WITH_USER "$START_PROG"
   return $?
 }
@@ -41,13 +37,12 @@ restart() {
 }
 
 status() {
+  res=1
   PID_FILE=/tmp/livy.pid
   if [ -f $PID_FILE ] ; then
      PID=`cat $PID_FILE`
      kill -0 $PID
      res=$?
-  else 
-     res=1
   fi
   if [ $res -eq 0 ] ; then
    echo "livy($PID) is running"
@@ -87,4 +82,4 @@ case "$1" in
   esac
 
 
-exit $RETVAL
+exit $?
