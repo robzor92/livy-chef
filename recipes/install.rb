@@ -48,7 +48,7 @@ package "unzip" do
 end
 
 # Extract Livy
-livy_downloaded = "#{node.livy.dir}/.livy_extracted_#{node.livy.version}"
+livy_downloaded = "#{node.livy.base_dir}/.livy_extracted_#{node.livy.version}"
 
 bash 'extract-livy' do
         user "root"
