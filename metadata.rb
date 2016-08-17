@@ -17,6 +17,7 @@ depends          "kagent"
 
 recipe           "install", "Installs a Livy Spark REST Server"
 recipe           "default", "Starts  a Livy Spark REST Server"
+recipe           "purge", "Removes and deletes an installed Livy Spark REST Server"
 
 attribute "livyuser",
           :description => "User to install/run as",
