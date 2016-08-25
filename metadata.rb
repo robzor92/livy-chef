@@ -14,6 +14,7 @@ depends          "ndb"
 depends          "hops"
 depends          "apache_hadoop"
 depends          "kagent"
+depends          "java"
 
 recipe           "install", "Installs a Livy Spark REST Server"
 recipe           "default", "Starts  a Livy Spark REST Server"

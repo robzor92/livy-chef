@@ -7,6 +7,9 @@
 # All rights reserved
 #
 
+
+include_recipe "java"
+
 include_recipe "hops::wrap"
 
 my_ip = my_private_ip()
