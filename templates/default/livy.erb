@@ -26,19 +26,20 @@ start() {
 }
 
 stop() {
-  $EXEC_WITH_USER "$STOP_PROG"
+  "$STOP_PROG"
   return $?
 }
 
 restart() {
-  $EXEC_WITH_USER "$STOP_PROG"
+  "$STOP_PROG"
+  sleep 3
   $EXEC_WITH_USER "$START_PROG"
   return $?
 }
 
 status() {
   res=1
-  PID_FILE=/tmp/livy.pid
+  PID_FILE=<%= node.livy.pid_file %>
   if [ -f $PID_FILE ] ; then
      PID=`cat $PID_FILE`
      kill -0 $PID

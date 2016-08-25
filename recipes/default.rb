@@ -140,8 +140,8 @@ end
      service service_name
      start_script "service #{service_name} start"
      stop_script "service #{service_name} stop"
-     log_file "#{node.livy.home}/livy.log"
-     pid_file "/tmp/livy.pid"
+     log_file node.livy.log
+     pid_file node.livy.pid_file
    end
 #end
 

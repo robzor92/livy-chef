@@ -3,7 +3,7 @@
 export SPARK_HOME=<%= node.hadoop_spark.home %>
 export HADOOP_CONF_DIR=<%= node.apache_hadoop.home %>/etc/hadoop/conf
 
-PID_FILE=/tmp/livy.pid
+PID_FILE=<%= node.livy.pid_file %>
 if [ -f $PID_FILE ] ; then
  PID=`cat $PID_FILE`
  kill -0 $PID 2>&1 > /dev/null
@@ -14,5 +14,5 @@ if [ -f $PID_FILE ] ; then
 fi
 
 
-nohup <%= node.livy.home %>/bin/livy-server  2>&1 > <%= node.livy.home %>/livy.log &
-echo $! > /tmp/livy.pid
+nohup <%= node.livy.home %>/bin/livy-server  2>&1 > <%= node.livy.log %> &
+echo $! > $PID_FILE

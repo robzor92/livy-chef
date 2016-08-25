@@ -16,4 +16,7 @@ default.livy.home                    =  node.livy.dir + "/livy-server"
 default.livy.keystore                = "#{node.kagent.base_dir}/node_server_keystore.jks"
 default.livy.keystore_password       = node.hopsworks.master.password
 
+default.livy.pid_file                = "/tmp/livy.pid"
+default.livy.log                     = "#{node.livy.home}/livy.log"
+
 default.livy.systemd                 = "true"
