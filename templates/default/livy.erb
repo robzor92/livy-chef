@@ -31,9 +31,9 @@ stop() {
 }
 
 restart() {
-  "$STOP_PROG"
+  stop
   sleep 3
-  $EXEC_WITH_USER "$START_PROG"
+  start
   return $?
 }
 
