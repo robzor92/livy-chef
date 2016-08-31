@@ -20,7 +20,15 @@ recipe           "install", "Installs a Livy Spark REST Server"
 recipe           "default", "Starts  a Livy Spark REST Server"
 recipe           "purge", "Removes and deletes an installed Livy Spark REST Server"
 
-attribute "livyuser",
+attribute "java/jdk_version",
+          :description =>  "Jdk version",
+          :type => 'string'
+
+attribute "java/install_flavor",
+          :description =>  "Oracle (default) or openjdk",
+          :type => 'string'
+
+attribute "livy/user",
           :description => "User to install/run as",
           :type => 'string'
 
@@ -28,26 +36,26 @@ attribute "livy/dir",
           :description => "base dir for installation",
           :type => 'string'
 
-attribute "livy.version",
+attribute "livy/version",
           :dscription => "livy.version",
           :type => "string"
 
-attribute "livy.url",
+attribute "livy/url",
           :dscription => "livy.url",
           :type => "string"
 
-attribute "livy.port",
+attribute "livy/port",
           :dscription => "livy.port",
           :type => "string"
 
-attribute "livy.home",
+attribute "livy/home",
           :dscription => "livy.home",
           :type => "string"
 
-attribute "livy.keystore",
+attribute "livy/keystore",
           :dscription => "ivy.keystore",
           :type => "string"
 
-attribute "livy.keystore_password",
+attribute "livy/keystore_password",
           :dscription => "ivy.keystore_password",
           :type => "string"
