@@ -1,3 +1,6 @@
+
+include_recipe "hops::wrap"
+
 my_ip = my_private_ip()
 nn_endpoint = private_recipe_ip("apache_hadoop", "nn") + ":#{node.apache_hadoop.nn.port}"
 home = node.apache_hadoop.hdfs.user_home
@@ -129,18 +132,18 @@ else #sysv
     group "root"
     mode 0754
     notifies :enable, resources(:service => service_name)
-    notifies :restart, resources(:service => service_name), :immediately
+    notifies :start, resources(:service => service_name), :immediately
   end
 
 end
 
 
-#if node.kagent.enabled == "true" 
+if node.kagent.enabled == "true" 
    kagent_config service_name do
      service service_name
      log_file node.livy.log
    end
-#end
+end
 
 
 livy_restart "restart-livy-needed" do
