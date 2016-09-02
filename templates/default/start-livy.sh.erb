@@ -16,3 +16,19 @@ fi
 
 nohup <%= node.livy.home %>/bin/livy-server  2>&1 > <%= node.livy.log %> &
 echo $! > $PID_FILE
+
+PID=`cat $PID_FILE`
+
+wait_pid_started=5
+timeout=0
+while [ $timeout -lt $wait_pid_started ] ; do
+    sleep 1
+    (kill -0 $PID) 2> /dev/null && break
+    echo -n "."
+    timeout=`expr $timeout + 1`
+done
+if [ $timeout -eq $wait_pid_started ] ; then
+  exit 1
+fi
+
+exit 0
