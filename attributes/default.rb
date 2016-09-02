@@ -1,9 +1,3 @@
-include_attribute "kagent"
-include_attribute "hops"
-include_attribute "apache_hadoop"
-include_attribute "hadoop_spark"
-include_attribute "hopsworks"
-
 default.livy.user                    = node.hadoop_spark.user
 default.livy.group                   = node.hadoop_spark.group
 
