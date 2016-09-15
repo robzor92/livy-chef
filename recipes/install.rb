@@ -20,11 +20,11 @@ group node.livy.group do
 end
 
 user node.livy.user do
-  supports :manage_home => true
   home "/home/#{node.livy.user}"
   action :create
   system true
   shell "/bin/bash"
+  manage_home true
   not_if "getent passwd #{node.livy.user}"
 end
 
