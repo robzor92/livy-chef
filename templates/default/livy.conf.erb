@@ -11,8 +11,8 @@ livy.server.host = <%= @private_ip %>
 # What port to start the server on.
 livy.server.port = <%= node.livy.port %>
 
-# This option is no longer used.
-# livy.server.session.factory = yarn
+# What spark master Livy sessions should use.
+livy.spark.master = yarn
 
 # Time in milliseconds on how long Livy will wait before timing out an idle session.
 # Default is one hour.
