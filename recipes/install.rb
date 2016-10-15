@@ -51,7 +51,7 @@ package "unzip" do
 end
 
 # Extract Livy
-livy_downloaded = "#{node.livy.base_dir}/.livy_extracted_#{node.livy.version}"
+livy_downloaded = "#{node.livy.home}/.livy_extracted_#{node.livy.version}"
 
 bash 'extract-livy' do
         user "root"
@@ -62,7 +62,8 @@ bash 'extract-livy' do
                 mv /tmp/livy-server-#{node.livy.version} #{node.livy.dir}
                 # remove old symbolic link, if any
                 rm -f #{node.livy.home}
-                ln -s #{node.livy.base_dir} #{node.livy.home}
+                ln -s #{node.livy.home} #{node.livy.base_dir}
+                chown -R #{node.livy.user}:#{node.livy.group} #{node.livy.home}
                 chown -R #{node.livy.user}:#{node.livy.group} #{node.livy.base_dir}
                 touch #{livy_downloaded}
                 chown -R #{node.livy.user}:#{node.livy.group} #{livy_downloaded}
