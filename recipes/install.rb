@@ -61,7 +61,7 @@ bash 'extract-livy' do
                 unzip #{cached_package_filename} -d /tmp
                 mv /tmp/livy-server-#{node.livy.version} #{node.livy.dir}
                 # remove old symbolic link, if any
-                rm -f #{node.livy.home}
+                rm -f #{node.livy.base_dir}
                 ln -s #{node.livy.home} #{node.livy.base_dir}
                 chown -R #{node.livy.user}:#{node.livy.group} #{node.livy.home}
                 chown -R #{node.livy.user}:#{node.livy.group} #{node.livy.base_dir}
