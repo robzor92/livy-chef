@@ -15,8 +15,8 @@
 
 # Variables
 
-START_PROG="<%= node.livy.home %>/bin/start-livy.sh"  
-STOP_PROG="<%= node.livy.home %>/bin/stop-livy.sh"  
+START_PROG="<%= node.livy.base_dir %>/bin/start-livy.sh"  
+STOP_PROG="<%= node.livy.base_dir %>/bin/stop-livy.sh"  
 EXEC_WITH_USER="su <%= node.livy.user %> -c"
 
 start() {

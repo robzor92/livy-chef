@@ -63,8 +63,8 @@ bash 'extract-livy' do
                 # remove old symbolic link, if any
                 rm -f #{node.livy.base_dir}
                 ln -s #{node.livy.home} #{node.livy.base_dir}
-		chown -R #{node.livy.user}:#{node.livy.group} #{node.livy.base_dir}
                 chown -R #{node.livy.user}:#{node.livy.group} #{node.livy.home}
+                chown -R #{node.livy.user}:#{node.livy.group} #{node.livy.base_dir}
                 touch #{livy_downloaded}
                 chown -R #{node.livy.user}:#{node.livy.group} #{livy_downloaded}
         EOH

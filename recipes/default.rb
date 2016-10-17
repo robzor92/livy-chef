@@ -26,11 +26,11 @@ for d in tmp_dirs
   end
 end
 
-file "#{node.livy.home}/conf/livy.conf" do
+file "#{node.livy.base_dir}/conf/livy.conf" do
  action :delete
 end
 
-template "#{node.livy.home}/conf/livy.conf" do
+template "#{node.livy.base_dir}/conf/livy.conf" do
   source "livy.conf.erb"
   owner node.livy.user
   group node.livy.group
@@ -42,36 +42,36 @@ template "#{node.livy.home}/conf/livy.conf" do
 end
 
 
-file "#{node.livy.home}/conf/spark-blacklist.conf" do
+file "#{node.livy.base_dir}/conf/spark-blacklist.conf" do
  action :delete
 end
 
-template "#{node.livy.home}/conf/spark-blacklist.conf" do
+template "#{node.livy.base_dir}/conf/spark-blacklist.conf" do
   source "spark-blacklist.conf.erb"
   owner node.livy.user
   group node.livy.group
   mode 0655
 end
 
-file "#{node.livy.home}/conf/livy-env.sh.erb" do
+file "#{node.livy.base_dir}/conf/livy-env.sh.erb" do
  action :delete
 end
 
-template "#{node.livy.home}/conf/livy-env.sh" do
+template "#{node.livy.base_dir}/conf/livy-env.sh" do
   source "livy-env.sh.erb"
   owner node.livy.user
   group node.livy.group
   mode 0655
 end
 
-template "#{node.livy.home}/bin/start-livy.sh" do
+template "#{node.livy.base_dir}/bin/start-livy.sh" do
   source "start-livy.sh.erb"
   owner node.livy.user
   group node.livy.group
   mode 0751
 end
 
-template "#{node.livy.home}/bin/stop-livy.sh" do
+template "#{node.livy.base_dir}/bin/stop-livy.sh" do
   source "stop-livy.sh.erb"
   owner node.livy.user
   group node.livy.group
