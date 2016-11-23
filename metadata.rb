@@ -59,3 +59,8 @@ attribute "livy/keystore",
 attribute "livy/keystore_password",
           :dscription => "ivy.keystore_password",
           :type => "string"
+
+attribute "livy/default/private_ips",
+          :description => "Set ip addresses",
+          :type => "array"
+
