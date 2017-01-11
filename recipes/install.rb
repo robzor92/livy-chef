@@ -71,5 +71,10 @@ bash 'extract-livy' do
      not_if { ::File.exists?( "#{livy_downloaded}" ) }
 end
 
-
-
+directory "#{node.livy.home}/logs" do
+  owner node.livy.user
+  group node.livy.group
+  mode "750"
+  action :create
+  not_if { File.directory?("#{node.livy.home}/logs") }
+end
