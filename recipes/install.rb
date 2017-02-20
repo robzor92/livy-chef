@@ -22,7 +22,6 @@ end
 user node.livy.user do
   home "/home/#{node.livy.user}"
   action :create
-  system true
   shell "/bin/bash"
   manage_home true
   not_if "getent passwd #{node.livy.user}"
