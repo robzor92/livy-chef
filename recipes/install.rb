@@ -14,11 +14,6 @@ include_recipe "hops::wrap"
 
 my_ip = my_private_ip()
 
-group node.livy.group do
-  action :create
-  not_if "getent group #{node.livy.group}"
-end
-
 user node.livy.user do
   home "/home/#{node.livy.user}"
   action :create
