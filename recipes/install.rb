@@ -7,13 +7,18 @@
 # All rights reserved
 #
 
-
 include_recipe "java"
 
 my_ip = my_private_ip()
 
+group node.livy.group do
+  action :create
+  not_if "getent group #{node.livy.group}"
+end
+
 user node.livy.user do
   home "/home/#{node.livy.user}"
+  gid node.livy.group
   action :create
   shell "/bin/bash"
   manage_home true
