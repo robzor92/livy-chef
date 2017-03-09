@@ -25,7 +25,7 @@ user node.livy.user do
   not_if "getent passwd #{node.livy.user}"
 end
 
-group node.livy.group do
+group node.kagent.certs_group do
   action :modify
   members ["#{node.livy.user}"]
   append true
