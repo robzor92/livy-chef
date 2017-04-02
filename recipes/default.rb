@@ -10,7 +10,6 @@ hops_hdfs_directory "#{livy_dir}" do
   owner node.livy.user
   group node.hops.group
   mode "1770"
-  not_if ". #{node.hops.home}/sbin/set-env.sh && #{node.hops.home}/bin/hdfs dfs -test -d #{livy_dir}"
 end
 
 tmp_dirs   = [ livy_dir, "#{livy_dir}/rsc-jars", "#{livy_dir}/rpl-jars" ] 
@@ -20,7 +19,6 @@ for d in tmp_dirs
     owner node.livy.user
     group node.hops.group
     mode "1777"
-    not_if ". #{node.hops.home}/sbin/set-env.sh && #{node.hops.home}/bin/hdfs dfs -test -d #{d}"
   end
 end
 
