@@ -40,27 +40,27 @@ attribute "livy/dir",
           :type => 'string'
 
 attribute "livy/version",
-          :dscription => "livy.version",
+          :dscription => "livy version",
           :type => "string"
 
 attribute "livy/url",
-          :dscription => "livy.url",
+          :dscription => "livy url to binary",
           :type => "string"
 
 attribute "livy/port",
-          :dscription => "livy.port",
+          :dscription => "livy port",
           :type => "string"
 
 attribute "livy/home",
-          :dscription => "livy.home",
+          :dscription => "livy home directory",
           :type => "string"
 
 attribute "livy/keystore",
-          :dscription => "ivy.keystore",
+          :dscription => "ivy keystore path",
           :type => "string"
 
 attribute "livy/keystore_password",
-          :dscription => "ivy.keystore_password",
+          :dscription => "ivy keystore_password",
           :type => "string"
 
 attribute "livy/default/private_ips",
