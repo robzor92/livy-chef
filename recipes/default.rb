@@ -149,3 +149,16 @@ end
 livy_restart "restart-livy-needed" do
   action :restart
 end
+
+
+
+
+bash "jupyter-hdfscontents" do
+    user "root"
+    code <<-EOF
+    set -e
+    export HADOOP_HOME=#{node[:hops][:base_dir]}
+    pip install pydoop
+    pip install 'hdfscontents>=0.4'
+EOF
+end

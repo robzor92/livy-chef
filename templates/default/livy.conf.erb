@@ -21,6 +21,8 @@ livy.spark.master = yarn
 # If livy should impersonate the requesting users when creating a new session.
 livy.impersonation.enabled = true
 
+livy.server.csrf_protection.enabled = false
+
 # Comma-separated list of Livy RSC jars. By default Livy will upload jars from its installation
 # directory every time a session is started. By caching these files in HDFS, for example, startup
 # time of sessions on YARN can be reduced.
@@ -43,4 +45,10 @@ livy.impersonation.enabled = true
 # default it's empty, meaning users can only reference remote URIs when starting their
 # sessions.
 # livy.file.local-dir-whitelist =
+
+livy.server.recovery.mode=recovery
+
+livy.server.recovery.state-store=filesystem
+
+livy.server.recovery.state-store.url = file://<%= node[:livy][:base_dir] %>/logs
 
