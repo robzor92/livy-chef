@@ -11,6 +11,8 @@ include_recipe "java"
 
 my_ip = my_private_ip()
 
+hops_groups()
+
 group node.livy.group do
   action :create
   not_if "getent group #{node.livy.group}"
