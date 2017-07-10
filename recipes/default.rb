@@ -15,7 +15,7 @@ end
 tmp_dirs   = [ livy_dir, "#{livy_dir}/rsc-jars", "#{livy_dir}/rpl-jars" ] 
 for d in tmp_dirs
  hops_hdfs_directory d do
-    action :create
+    action :create_as_superuser
     owner node.livy.user
     group node.hops.group
     mode "1777"
