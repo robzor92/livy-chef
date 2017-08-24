@@ -64,6 +64,7 @@ bash 'extract-livy' do
                 ln -s #{node.livy.home} #{node.livy.base_dir}
                 chown -R #{node.livy.user}:#{node.livy.group} #{node.livy.home}
                 chown -R #{node.livy.user}:#{node.livy.group} #{node.livy.base_dir}
+                chmod 750 #{node.livy.home}
                 touch #{livy_downloaded}
                 chown -R #{node.livy.user}:#{node.livy.group} #{livy_downloaded}
         EOH
