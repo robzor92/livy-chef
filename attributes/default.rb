@@ -1,6 +1,6 @@
 include_attribute "kagent"
 
-default.livy.user                    = node.install.user.empty? ? node.hadoop_spark.user : node.install.user
+default.livy.user                    = node.install.user.empty? ? "livy" : node.install.user
 default.livy.group                   = node.install.user.empty? ? node.hadoop_spark.group : node.install.user
 
 default.livy.version                 = "0.4.0-SNAPSHOT"
