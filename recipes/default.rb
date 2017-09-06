@@ -4,7 +4,7 @@ nn_endpoint = private_recipe_ip("hops", "nn") + ":#{node.hops.nn.port}"
 home = node.hops.hdfs.user_home
 
 
-livy_dir="#{home}/#{node.livy.user}/livy"
+livy_dir="#{home}/#{node.livy.user}"
 hops_hdfs_directory "#{livy_dir}" do
   action :create_as_superuser
   owner node.livy.user
@@ -22,10 +22,6 @@ for d in tmp_dirs
   end
 end
 
-file "#{node.livy.base_dir}/conf/livy.conf" do
- action :delete
-end
-
 template "#{node.livy.base_dir}/conf/livy.conf" do
   source "livy.conf.erb"
   owner node.livy.user
@@ -38,19 +34,11 @@ template "#{node.livy.base_dir}/conf/livy.conf" do
 end
 
 
-file "#{node.livy.base_dir}/conf/spark-blacklist.conf" do
- action :delete
-end
-
 template "#{node.livy.base_dir}/conf/spark-blacklist.conf" do
   source "spark-blacklist.conf.erb"
   owner node.livy.user
   group node.livy.group
   mode 0655
-end
-
-file "#{node.livy.base_dir}/conf/livy-env.sh.erb" do
- action :delete
 end
 
 template "#{node.livy.base_dir}/conf/livy-env.sh" do
@@ -158,7 +146,8 @@ bash "jupyter-hdfscontents" do
     code <<-EOF
     set -e
     export HADOOP_HOME=#{node[:hops][:base_dir]}
+    export HADOOP_CONF_DIR=#{node[:hops][:base_dir]}/etc/hadoop
     pip install pydoop
-    pip install 'hdfscontents>=0.4'
+    pip install hdfscontents --upgrade
 EOF
 end

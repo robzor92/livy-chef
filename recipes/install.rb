@@ -33,6 +33,12 @@ group node.kagent.certs_group do
   append true
 end
 
+group node.hops.group do
+  action :modify
+  members ["#{node.livy.user}"]
+  append true
+end
+
 
 package_url = "#{node.livy.url}"
 base_package_filename = File.basename(package_url)
