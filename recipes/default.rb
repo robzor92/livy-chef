@@ -158,6 +158,7 @@ bash "sparkmagic-support" do
     retries 1
     code <<-EOF
     set -e
+    pip install --user numpy
     pip install --user --upgrade sparkmagic
 EOF
 end
