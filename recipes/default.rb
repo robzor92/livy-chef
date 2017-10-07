@@ -155,6 +155,7 @@ end
 
 bash "sparkmagic-support" do
     user node['livy']['user']
+    retries 1
     code <<-EOF
     set -e
     pip install --user --upgrade sparkmagic
