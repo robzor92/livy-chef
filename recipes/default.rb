@@ -170,6 +170,6 @@ bash "sparkmagic-support-user" do
     user node['livy']['user']
     code <<-EOF
     set -e
-    pip install --upgrade --user sparkmagic
+#    pip install --upgrade --user sparkmagic
 EOF
 end
