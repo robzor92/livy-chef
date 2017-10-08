@@ -153,23 +153,10 @@ EOF
 end
 
 
-# bash "sparkmagic-support" do
-#     user 'root'
-#     retries 1
-#     code <<-EOF
-#     set -e
-#     pip install --upgrade --target /usr/lib/python2.7/site-packages numpy
-#     pip install --upgrade --target /usr/lib/python2.7/site-packages setuptools
-#     pip install --upgrade --target /usr/lib/python2.7/site-packages sparkmagic
-# EOF
-# end
-
-
-
 bash "sparkmagic-support-user" do
     user node['livy']['user']
+    ignore_failure true
     code <<-EOF
-    set -e
     pip install --upgrade --user sparkmagic
 EOF
 end
