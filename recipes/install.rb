@@ -65,7 +65,7 @@ bash 'extract-livy' do
                 set -e
                 rm -rf #{Chef::Config['file_cache_path']}/livy-#{node['livy']['version']}-bin
                 unzip #{cached_package_filename} -d #{Chef::Config['file_cache_path']}
-                mv #{Chef::Config['file_cache_path']}/livy-#{node['livy']['version']}-bin #{node['livy']['dir']}
+                mv -f #{Chef::Config['file_cache_path']}/livy-#{node['livy']['version']}-bin #{node['livy']['dir']}
                 # remove old symbolic link, if any
                 rm -f #{node['livy']['base_dir']}
                 ln -s #{node['livy']['home']} #{node['livy']['base_dir']}
